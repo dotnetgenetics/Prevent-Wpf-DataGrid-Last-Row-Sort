@@ -1,0 +1,38 @@
+﻿<Window x:Class="PreventDatagridLastRowSort.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PreventDatagridLastRowSort"
+        mc:Ignorable="d"
+        Title="Main Window" Height="350" Width="525" Loaded="Window_Loaded" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <DataGrid Name="dgProducts" AutoGenerateColumns="False" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="2" CanUserAddRows="False" Sorting="dgProducts_Sorting" LayoutUpdated="dgProducts_LayoutUpdated">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=ProductName,Mode=TwoWay}" Width="215"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=UnitPrice,Mode=TwoWay}"/>
+                <DataGridTextColumn Header="Quantity Per Unit" Binding="{Binding Path=QuantityPerUnit,Mode=TwoWay}" Width="180"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>
+                        Discontinue
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox Name="chkDiscontinue" IsChecked="{Binding Path=Discontinue,Mode=TwoWay}" Margin="45 2 0 0" IsEnabled="False"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
